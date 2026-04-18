@@ -10,7 +10,7 @@
 <br>
 
 <div align="center">
-  <h1>⚖️ ArthaNeeti — Enterprise Legal Intelligence for Bharat</h1>
+  <h1>⚖️ NyayaBiz— Enterprise Legal Intelligence for Bharat</h1>
   <p><em>A sovereign, production-grade legal research platform built natively on the Databricks Data Intelligence Platform.</em></p>
 </div>
 
@@ -37,9 +37,9 @@ India's regulatory environment is one of the most complex in the world. Business
 - They **cannot handle multilingual queries** in Hindi, Marathi, Tamil, Telugu, and other Indian languages.
 - They are **unable to resolve cross-references** (e.g., *"Subject to Section 4 of Chapter III"*), which are pervasive in Indian legislation.
 
-### Why ArthaNeeti?
+### Why NyayaBiz?
 
-**ArthaNeeti** (अर्थनीति — *"Policy of Purpose"*) replaces generic LLM uncertainty with **Grounded Legal Reasoning**. Every answer is:
+**NyayaBiz** (अर्थनीति — *"Policy of Purpose"*) replaces generic LLM uncertainty with **Grounded Legal Reasoning**. Every answer is:
 
 1. ✅ **Traceable** — cited back to a specific clause, section, and page number in the legal corpus.
 2. ✅ **Verified** — a built-in hallucination detection layer (LLM-as-Judge) validates every response before it reaches the user.
