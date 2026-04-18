@@ -1,0 +1,37 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# NyayaBiz RAG — Python Dependencies
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Core LangChain stack
+langchain
+langchain-community
+langchain-text-splitters
+
+# PDF parsing
+pypdf
+
+# Data
+pandas
+
+# Databricks integration
+databricks-vectorsearch
+databricks-langchain
+
+# Translation models (IndicTrans2)
+transformers==4.38.2
+torch
+sentencepiece
+sacremoses
+langdetect
+IndicTransToolkit @ git+https://github.com/VarunGumma/IndicTransToolkit.git
+
+# Reranking
+sentence-transformers
+
+# Audio (Whisper)
+openai-whisper
+ffmpeg-python
+
+# UI
+gradio
+ipywidgets

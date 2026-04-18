@@ -1,0 +1,28 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# NyayaBiz Legal Advisor — Databricks App Configuration
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# This file tells Databricks how to run the application.
+#
+# After deploying, add the following resources via the App Settings UI:
+#   1. SQL Warehouse  → key: "sql_warehouse"
+#   2. (Optional) Serving Endpoint → for LLM access
+#
+# The app will crash on first deploy until the SQL Warehouse resource
+# is added and permissions are granted.
+# ─────────────────────────────────────────────────────────────────────────────
+
+command: ["python", "app.py"]
+
+env:
+  # ── SQL Warehouse (resolved from the resource added in the UI) ───────────
+  - name: "DATABRICKS_WAREHOUSE_ID"
+    valueFrom: "sql_warehouse"
+
+  # ── Vector Search Index ──────────────────────────────────────────────────
+  - name: "VECTOR_SEARCH_INDEX"
+    value: "workspace.default.final_vector"
+
+  # ── LLM Serving Endpoint ─────────────────────────────────────────────────
+  - name: "LLM_ENDPOINT"
+    value: "databricks-meta-llama-3-3-70b-instruct"

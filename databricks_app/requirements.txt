@@ -1,0 +1,15 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# NyayaBiz Databricks App — Python Dependencies
+# ─────────────────────────────────────────────────────────────────────────────
+# Keep this lightweight — Databricks App compute is not GPU-enabled,
+# so we avoid heavy ML model libraries (torch, transformers, etc.).
+# ─────────────────────────────────────────────────────────────────────────────
+
+dash>=2.14.0
+databricks-sdk>=0.30.0
+databricks-sql-connector>=3.0.0
+databricks-langchain>=0.1.0
+langchain>=0.2.0
+langchain-core>=0.2.0
+langchain-community>=0.2.0
+pandas>=2.0.0
