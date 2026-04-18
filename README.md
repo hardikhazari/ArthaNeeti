@@ -1,3 +1,5 @@
+<img src="https://capsule-render.vercel.app/api?type=rect&color=FF9999&height=3" width="100%">
+
 <div align="center">
   <img src="https://img.shields.io/badge/Databricks-Data%20Intelligence%20Platform-orange?style=for-the-badge&logo=databricks" alt="Databricks">
   <img src="https://img.shields.io/badge/Bharat%20Bricks%20Hacks-2026-green?style=for-the-badge" alt="Hackathon">
@@ -404,3 +406,5 @@ Built for **Bharat Bricks Hacks 2026** — Databricks Hackathon.
 <div align="center">
   <em>Empowering Indian businesses through sovereign, grounded legal intelligence.</em>
 </div>
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=FF9999&height=3" width="100%">
