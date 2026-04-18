@@ -38,3 +38,11 @@ AI Response:
 
 Is the response grounded? (YES/NO):
 If NO, list the unsupported claims:"""
+
+EXPANSION_PROMPT = """You are a legal research assistant. 
+Generate 2-3 specific search variations for the following user query to ensure maximum retrieval recall across legal documents.
+Include section-specific and conceptual variations.
+
+Original Query: {question}
+
+Search Variations (one per line):"""

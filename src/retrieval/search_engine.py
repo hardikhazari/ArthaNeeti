@@ -8,16 +8,23 @@ class SearchEngine:
             columns=search_columns
         )
 
-    def retrieve(self, query: str, k: int = 15, query_type: str = "HYBRID"):
+    def retrieve(self, query: str, k: int = 15, query_type: str = "HYBRID", filters: dict = None):
         """
-        Hybrid retrieval (Dense + BM25).
+        Hybrid retrieval (Dense + BM25) with optional metadata filtering.
         """
-        print(f"[*] Retrieving top-{k} docs for: {repr(query)}...")
+        print(f"[*] Retrieving top-{k} docs for: {repr(query)} (Filters: {filters})...")
+        
+        search_kwargs = {
+            "k": k,
+            "query_type": query_type
+        }
+        
+        # Add metadata filters if provided
+        if filters:
+            search_kwargs["filters"] = filters
+
         retriever = self.vector_store.as_retriever(
-            search_kwargs={
-                "k": k,
-                "query_type": query_type
-            }
+            search_kwargs=search_kwargs
         )
         return retriever.invoke(query)
 
@@ -30,4 +37,5 @@ if __name__ == "__main__":
         index_name=f"{cfg['tables']['catalog']}.{cfg['tables']['schema']}.{cfg['tables']['gold_index']}",
         search_columns=["source_file", "section_id", "heading_chain", "raw_text"]
     )
-    # docs = engine.retrieve("legal requirements for food")
+    # Example filtered retrieve:
+    # docs = engine.retrieve("safety rules", filters={"source_file": "fssai-1.pdf"})
