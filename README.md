@@ -1,3 +1,7 @@
+<table>
+<tr>
+<td>
+
 # ArthaNeeti: Enterprise-Grade Legal Intelligence on Databricks ⚖️
 
 [![Databricks](https://img.shields.io/badge/Powered%20By-Databricks-orange?style=for-the-badge&logo=databricks)](https://www.databricks.com/)
@@ -66,7 +70,7 @@ graph TD
     subgraph "Advanced Intelligence Pipeline"
         C1[IndicTrans2 Translation Bridge]
         C2[Mosaic AI Reranker Serving]
-        C3[Gemini Pro - Semantic Reasoner]
+        C3[Llama 3.3 70B - Semantic Reasoner]
         C4[Whisper - Multilingual Audio]
     end
 
@@ -146,7 +150,7 @@ Multi-Hop*: (2.4s) [#####]  <-- X-Ref Resolution Layer
 
 ## 🤖 Model Ecosystem
 
-*   **Google Gemini Pro**: The primary reasoning engine, chosen for its vast context window and superior logical deduction in statutory law.
+*   **Meta Llama 3.3 70B**: The primary reasoning engine, served via **Databricks Foundation Model APIs (Provisioned Throughput)**, chosen for its industrial-grade reasoning and strict compliance with legal reasoning prompts.
 *   **IndicTrans2 (AI4Bharat)**: Enables high-fidelity translation for 15+ Indian languages, ensuring the "Nyaya" (justice) reaches the grassroots.
 *   **BGE-Reranker-v2-m3**: Deployed via **Databricks Model Serving** for real-time neural re-ordering of legal chunks.
 *   **OpenAI Whisper**: Used for audio-first legal consultation, supporting local dialects through advanced Speech-to-Text.
@@ -165,13 +169,13 @@ pip install -r requirements.txt
 ### 2. Databricks Workspace Setup
 1.  **UC Volumes**: Create a Volume at `/Volumes/workspace/default/data/legal_corpus/`.
 2.  **Asset Upload**: Upload `FSSI-1.pdf`, `updated_data.csv`, and other legal PDFs to the Volume.
-3.  **Secrets**: Add `GEMINI_API_KEY` to your Databricks Secrets scope.
+3.  **Secrets**: Add `DATABRICKS_TOKEN` to your Databricks Secrets scope.
 
 ### 3. Pipeline Execution
-1.  Open **`ArthaNeeti.ipynb`**.
-2.  Run the **Setup Cells** (Cell 1-3) to initialize the Spark session and Lakehouse client.
-3.  Execute **Cell 5** to begin the Spark-distributed Ingestion into Delta Tables.
-4.  Run **Cell 12** to launch the **Interactive Analyst UI**.
+1.  Open **`notebooks/ArthaNeeti_Main.py`**.
+2.  Run the **Setup Cells** to initialize the Spark session and Lakehouse client.
+3.  Execute the **Ingestion** section to begin the Spark-distributed Ingestion into Delta Tables.
+4.  Launch the **Interactive Analyst UI** to begin querying.
 
 ---
 
@@ -183,3 +187,7 @@ pip install -r requirements.txt
 
 ---
 *Developed for Bharat Bricks Hacks 2026. Built with precision for the future of Indian Jurisprudence.*
+
+</td>
+</tr>
+</table>
