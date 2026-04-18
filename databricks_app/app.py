@@ -21,6 +21,7 @@ import logging
 import dash
 from dash import html, dcc, callback, Input, Output, State, no_update
 from databricks.sdk import WorkspaceClient
+from databricks.vector_search.client import VectorSearchClient
 from databricks_langchain import DatabricksVectorSearch, ChatDatabricks
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
@@ -37,12 +38,50 @@ VECTOR_SEARCH_INDEX = os.getenv("VECTOR_SEARCH_INDEX", "workspace.default.final_
 LLM_ENDPOINT        = os.getenv("LLM_ENDPOINT", "databricks-meta-llama-3-3-70b-instruct")
 APP_PORT             = int(os.getenv("DATABRICKS_APP_PORT", "8000"))
 
+# ─────────────────────────────────────────────────────────────────────────────
+# AUTHENTICATION — Bootstrap from Databricks App runtime
+# ─────────────────────────────────────────────────────────────────────────────
+# Databricks Apps use OAuth (not PAT tokens), so w.config.token is None.
+# We extract a bearer token from the SDK's auth header factory and propagate
+# it via env vars so the databricks-vectorsearch SDK can authenticate.
+
+w = WorkspaceClient()
+host = w.config.host
+
+# Try PAT first, fall back to extracting OAuth bearer token from SDK headers
+token = w.config.token
+if not token:
+    try:
+        headers = w.config.authenticate()
+        auth_header = headers.get("Authorization", "")
+        if auth_header.startswith("Bearer "):
+            token = auth_header[7:]
+    except Exception as e:
+        logger.warning(f"Could not extract OAuth token: {e}")
+
+if not token:
+    raise RuntimeError(
+        "Could not obtain auth token. Ensure the Databricks App has a "
+        "Service Principal configured and the 'sql_warehouse' resource "
+        "is added in App Settings."
+    )
+
+os.environ["DATABRICKS_HOST"]  = host
+os.environ["DATABRICKS_TOKEN"] = token
+logger.info(f"Authenticated to: {host}")
+
 
 # ─────────────────────────────────────────────────────────────────────────────
 # RAG COMPONENTS
 # ─────────────────────────────────────────────────────────────────────────────
 
-# Vector store (retriever)
+# Vector store — create client with explicit auth to avoid SDK auto-detect issues
+vs_client = VectorSearchClient(
+    workspace_url=host,
+    personal_access_token=token,
+    disable_notice=True,
+)
+
 vector_store = DatabricksVectorSearch(
     index_name=VECTOR_SEARCH_INDEX,
     columns=["source_file", "section_id", "heading_chain", "xrefs", "page", "raw_text"],
