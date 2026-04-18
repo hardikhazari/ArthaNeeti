@@ -1,4 +1,4 @@
-# Databricks RAG Project
+# ArthaNeeti
 
 This repository contains a RAG (Retrieval-Augmented Generation) system built for Databricks.
 
